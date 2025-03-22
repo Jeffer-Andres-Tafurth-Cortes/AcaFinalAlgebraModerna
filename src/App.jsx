@@ -30,13 +30,13 @@ function App() {
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setDarkMode(darkModeMediaQuery.matches);
-    
+
     const handleChange = (e) => {
       setDarkMode(e.matches);
     };
-    
+
     darkModeMediaQuery.addEventListener('change', handleChange);
-    
+
     return () => {
       darkModeMediaQuery.removeEventListener('change', handleChange);
     };
@@ -78,20 +78,38 @@ function App() {
   const calculatePermutation = () => {
     const n = parseInt(num1)
     const r = parseInt(num2)
-    if (isNaN(n) || isNaN(r) || n < r || n < 0 || r < 0) {
-      setResult("Error");
+    if (isNaN(n) || isNaN(r)) {
+      setResult("Error: \n El valor ingresado no es un numero");
       return;
     }
+    if (n < r) {
+      setResult("Error: \n El valor de n debe ser mayor o igual que el valor de r");
+      return
+    }
+    if (n < 0 || r < 0) {
+      setResult("Error: \n El valor de n y r debe ser mayor o igual que 0");
+      return
+    }
+
     setResult(factorial(n) / factorial(n - r))
   }
 
   const calculateCombination = () => {
     const n = parseInt(num1)
     const r = parseInt(num2)
-    if (isNaN(n) || isNaN(r) || n < r || n < 0 || r < 0) {
-      setResult("Error");
+    if (isNaN(n) || isNaN(r)) {
+      setResult("Error: \n El valor ingresado no es un numero");
       return;
     }
+    if (n < r) {
+      setResult("Error: \n El valor de n debe ser mayor o igual que el valor de r");
+      return
+    }
+    if (n < 0 || r < 0) {
+      setResult("Error: \n El valor de n y r debe ser mayor o igual que 0");
+      return
+    }
+
     setResult(factorial(n) / (factorial(r) * factorial(n - r)))
   }
 
@@ -119,7 +137,7 @@ function App() {
             pattern="[0-9]*\.?[0-9]*"
           />
         </div>
-        
+
         <div className='buttons'>
           <button onClick={() => handleOperation(add)}>Suma</button>
           <button onClick={() => handleOperation(subtract)}>Resta</button>
